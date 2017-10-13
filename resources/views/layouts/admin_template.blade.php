@@ -38,11 +38,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
     <!-- Main Header -->
-    @include('includes.header')
-    <!-- Left side column. contains the logo and sidebar -->
-    @include('includes.sidebar')
+@include('includes.header')
+<!-- Left side column. contains the logo and sidebar -->
+@include('includes.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -63,9 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    @include('includes.footer')
+@include('includes.footer')
 
-    <!-- Add the sidebar's background. This div must be placed
+<!-- Add the sidebar's background. This div must be placed
     immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
@@ -80,8 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+@yield('scripts')
+
 </body>
 </html>

@@ -12,6 +12,11 @@
 
             <div class="col-md-10 col-md-offset-1">
 
+                <!-- will be used to show any messages -->
+                @if (Session::has('message'))
+                    <div class="alert alert-info">{{ Session::get('message') }}</div>
+                @endif
+
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">
                         <div class="row">
@@ -19,7 +24,8 @@
                                 <h3 class="panel-title">Moderators</h3>
                             </div>
                             <div class="col col-xs-6 text-right">
-                                <button type="button" class="btn btn-sm btn-primary btn-create">Add New</button>
+                                <a href="{{ route('moderator.create') }}" type="button"
+                                   class="btn btn-sm btn-primary btn-create">Add New</a>
                             </div>
                         </div>
                     </div>
@@ -34,35 +40,40 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td align="center">
-                                    <a href="#" class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                    <a href="#" class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                                </td>
-                                <td class="hidden-xs">1</td>
-                                <td>John Doe</td>
-                                <td>johndoe@example.com</td>
-                            </tr>
+                            @foreach($moderators as $moderator)
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{ route('moderator.edit', $moderator->id) }}" class="btn btn-default"><em
+                                                    class="fa fa-pencil"></em></a>
+
+                                        <a href="{{ route('moderator.destroy', $moderator->id) }}"
+                                           class="btn btn-danger"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('delete-form').submit();">
+                                            <em class="fa fa-trash"></em>
+                                        </a>
+
+                                        {{--TO send a delete request--}}
+                                        <form id="delete-form" action="{{ route('moderator.destroy', $moderator->id) }}"
+                                              method="POST" onsubmit="ConfirmDelete()">
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            {{ csrf_field() }}
+                                        </form>
+
+                                    </td>
+                                    <td class="hidden-xs">{{ $moderator->id }}</td>
+                                    <td>{{ $moderator->name }}</td>
+                                    <td>{{ $moderator->email }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 
                     </div>
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col col-xs-4">Page 1 of 5
-                            </div>
                             <div class="col col-xs-8">
-                                <ul class="pagination hidden-xs pull-right">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                </ul>
-                                <ul class="pagination visible-xs pull-right">
-                                    <li><a href="#">«</a></li>
-                                    <li><a href="#">»</a></li>
-                                </ul>
+                                {{ $moderators->links() }}
                             </div>
                         </div>
                     </div>

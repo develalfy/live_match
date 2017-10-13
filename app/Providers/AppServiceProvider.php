@@ -24,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Bind every interface from our core to a repository
+        $models = [
+            'Moderator',
+        ];
+
+        foreach ($models as $model) {
+            $this->app->bind("Core\Interfaces\\" . "I" . $model, "Core\Repositories\\" . $model . "Repository");
+        }
     }
 }

@@ -23,11 +23,14 @@
                     <i class="fa fa-home"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="{{ Request::is('admin/moderator') ? 'active' : '' }}">
-                <a href="{{ route('moderator.index') }}">
-                    <i class="fa fa-user"></i> <span>Moderators</span>
-                </a>
-            </li>
+            {{-- Show this element for admin only --}}
+            @if(Auth::user()->id === 1)
+                <li class="{{ Request::is('admin/moderator') ? 'active' : '' }}">
+                    <a href="{{ route('moderator.index') }}">
+                        <i class="fa fa-user"></i> <span>Moderators</span>
+                    </a>
+                </li>
+            @endif
             <li class="{{ Request::is('admin/team') ? 'active' : '' }}">
                 <a href="{{ route('team.index') }}">
                     <i class="fa fa-signing"></i> <span>Teams</span>
