@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            // if admin is 0 -> just moderator --- if 1 -> he is an admin
+            $table->integer('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
