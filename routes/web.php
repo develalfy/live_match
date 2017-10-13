@@ -20,7 +20,7 @@ Route::get('/', function () {
  * Admin Area
  */
 Route::prefix('admin')->group(function () {
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('moderator', 'ModeratorController');
     Route::resource('team', 'TeamController');
     Route::resource('match', 'MatchController');

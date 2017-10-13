@@ -19,22 +19,22 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Shortcuts</li>
             <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                <a href="{{ url('/admin') }}">
+                <a href="{{ route('dashboard') }}">
                     <i class="fa fa-home"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li class="{{ Request::is('admin/moderator') ? 'active' : '' }}">
-                <a href="{{ url('/admin/moderator') }}">
+                <a href="{{ route('moderator.index') }}">
                     <i class="fa fa-user"></i> <span>Moderators</span>
                 </a>
             </li>
             <li class="{{ Request::is('admin/team') ? 'active' : '' }}">
-                <a href="{{ url('/admin/team') }}">
+                <a href="{{ route('team.index') }}">
                     <i class="fa fa-signing"></i> <span>Teams</span>
                 </a>
             </li>
             <li class="{{ Request::is('admin/match') ? 'active' : '' }}">
-                <a href="{{ url('/admin/match') }}">
+                <a href="{{ route('match.index') }}">
                     <i class="fa fa-soccer-ball-o"></i> <span>Matches</span>
                 </a>
             </li>
