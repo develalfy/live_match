@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,9 +20,10 @@ Route::get('/', function () {
  * Admin Area
  */
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return 'Hello to Admin area';
-    });
+    Route::get('/', 'HomeController@index');
+    Route::resource('moderator', 'ModeratorController');
+    Route::resource('team', 'TeamController');
+    Route::resource('match', 'MatchController');
 });
 
 /**
