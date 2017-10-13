@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         // Bind every interface from our core to a repository
         $models = [
             'Moderator',
+            'Team',
         ];
 
         foreach ($models as $model) {

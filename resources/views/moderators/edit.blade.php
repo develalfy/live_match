@@ -1,9 +1,9 @@
 @extends('layouts.admin_template')
 
 
-@section('title', 'List Moderators')
+@section('title', 'Edit Moderator')
 
-@section('description', 'List all moderators')
+@section('description', 'Edit moderator')
 
 @section('content')
 
@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Update
                                     </button>
                                 </div>
                             </div>

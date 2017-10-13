@@ -38,6 +38,18 @@ class ModeratorRepository implements IModerator
         return $moderator;
     }
 
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function findModerator($id)
+    {
+        $moderator = User::find($id);
+
+        return $moderator;
+    }
+
     /**
      * @param $id
      * @param $data
@@ -55,12 +67,11 @@ class ModeratorRepository implements IModerator
 
         return $moderator;
     }
-
     /**
      * @param $id
      * @return mixed
      */
-    public function deleteModerators($id)
+    public function deleteModerator($id)
     {
         $moderator = User::find($id);
         $moderator->delete();

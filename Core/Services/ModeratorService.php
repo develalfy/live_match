@@ -41,16 +41,23 @@ class ModeratorService
         return $moderator;
     }
 
+
+    public function findModerator($id)
+    {
+        $moderator = $this->moderator->findModerator($id);
+
+        return $moderator;
+    }
+
     public function updateModerator($id, $data)
     {
         $moderator = $this->moderator->updateModerator($id, $data);
 
         return $moderator;
     }
-
-    public function deleteModerators($id)
+    public function deleteModerator($id)
     {
-        $moderator = $this->moderator->deleteModerators($id);
+        $moderator = $this->moderator->deleteModerator($id);
 
         return $moderator;
     }

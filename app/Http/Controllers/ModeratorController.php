@@ -100,7 +100,7 @@ class ModeratorController extends Controller
      */
     public function edit($id)
     {
-        $moderator = User::find($id);
+        $moderator = $this->moderatorService->findModerator($id);
 
         return view('moderators.edit', compact('moderator'));
     }
@@ -130,7 +130,7 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Get a validator for an incoming creation request.
+     * Get a validator for an incoming update moderator request.
      *
      * @param $id
      * @param  array $data
@@ -155,7 +155,7 @@ class ModeratorController extends Controller
     public function destroy($id)
     {
         // delete
-        $this->moderatorService->deleteModerators($id);
+        $this->moderatorService->deleteModerator($id);
 
         // redirect
         Session::flash('message', 'Successfully deleted the user!');

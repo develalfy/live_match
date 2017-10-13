@@ -1,9 +1,9 @@
 @extends('layouts.admin_template')
 
 
-@section('title', 'List Moderators')
+@section('title', 'Create Moderator')
 
-@section('description', 'List all moderators')
+@section('description', 'Create new moderator')
 
 @section('content')
 

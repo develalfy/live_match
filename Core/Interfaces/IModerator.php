@@ -16,5 +16,7 @@ interface IModerator
 
     public function updateModerator($id, $data);
 
-    public function deleteModerators($id);
+    public function deleteModerator($id);
+
+    public function findModerator($id);
 }

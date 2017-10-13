@@ -1,9 +1,9 @@
 @extends('layouts.admin_template')
 
 
-@section('title', 'List Moderators')
+@section('title', 'List Teams')
 
-@section('description', 'List all moderators')
+@section('description', 'List all teams')
 
 @section('content')
 
@@ -21,10 +21,10 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <h3 class="panel-title">Moderators</h3>
+                                <h3 class="panel-title">Teams</h3>
                             </div>
                             <div class="col col-xs-6 text-right">
-                                <a href="{{ route('moderator.create') }}" type="button"
+                                <a href="{{ route('team.create') }}" type="button"
                                    class="btn btn-sm btn-primary btn-create">Add New</a>
                             </div>
                         </div>
@@ -36,17 +36,16 @@
                                 <th><em class="fa fa-cog"></em></th>
                                 <th class="hidden-xs">ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($moderators as $moderator)
+                            @foreach($teams as $team)
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ route('moderator.edit', $moderator->id) }}" class="btn btn-default"><em
+                                        <a href="{{ route('team.edit', $team->id) }}" class="btn btn-default"><em
                                                     class="fa fa-pencil"></em></a>
 
-                                        <a href="{{ route('moderator.destroy', $moderator->id) }}"
+                                        <a href="{{ route('team.destroy', $team->id) }}"
                                            class="btn btn-danger"
                                            onclick="event.preventDefault();
                                                      document.getElementById('delete-form').submit();">
@@ -54,16 +53,15 @@
                                         </a>
 
                                         {{--TO send a delete request--}}
-                                        <form id="delete-form" action="{{ route('moderator.destroy', $moderator->id) }}"
+                                        <form id="delete-form" action="{{ route('team.destroy', $team->id) }}"
                                               method="POST">
                                             <input name="_method" type="hidden" value="DELETE">
                                             {{ csrf_field() }}
                                         </form>
 
                                     </td>
-                                    <td class="hidden-xs">{{ $moderator->id }}</td>
-                                    <td>{{ $moderator->name }}</td>
-                                    <td>{{ $moderator->email }}</td>
+                                    <td class="hidden-xs">{{ $team->id }}</td>
+                                    <td>{{ $team->name }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -73,7 +71,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col col-xs-8">
-                                {{ $moderators->links() }}
+                                {{ $teams->links() }}
                             </div>
                         </div>
                     </div>
