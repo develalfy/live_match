@@ -12,6 +12,8 @@ interface ITeam
 {
     public function listTeams();
 
+    public function listAllTeams();
+
     public function createTeam($data);
 
     public function updateTeam($id, $data);

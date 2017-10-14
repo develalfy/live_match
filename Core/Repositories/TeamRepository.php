@@ -11,13 +11,27 @@ use Core\Interfaces\ITeam;
  * Date: 10/13/17
  * Time: 3:21 PM
  */
-
 class TeamRepository implements ITeam
 {
 
+    /**
+     * return all teams paginated
+     * @return mixed
+     */
     public function listTeams()
     {
         $teams = Team::paginate(10);
+
+        return $teams;
+    }
+
+    /**
+     * return all teams without pagination
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function listAllTeams()
+    {
+        $teams = Team::all();
 
         return $teams;
     }

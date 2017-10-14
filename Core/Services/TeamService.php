@@ -12,53 +12,63 @@ use Core\Interfaces\ITeam;
 
 class TeamService
 {
-    private $moderator;
+    private $team;
 
     /**
      * TeamService constructor.
-     * @param $moderator
+     * @param $team
      */
-    public function __construct(ITeam $moderator)
+    public function __construct(ITeam $team)
     {
-        $this->moderator = $moderator;
+        $this->team = $team;
     }
 
     /**
-     * Return all moderators
+     * Return all teams paginated
      * @return mixed
      */
     public function listTeams()
     {
-        $moderators = $this->moderator->listTeams();
+        $teams = $this->team->listTeams();
 
-        return $moderators;
+        return $teams;
+    }
+    /**
+     * Return all teams without pagination
+     * @return mixed
+     */
+    public function listAllTeams()
+    {
+        $teams = $this->team->listAllTeams();
+
+        return $teams;
     }
 
     public function createTeam($data)
     {
-        $moderator = $this->moderator->createTeam($data);
+        $team = $this->team->createTeam($data);
 
-        return $moderator;
+        return $team;
     }
 
     public function findTeams($id)
     {
-        $team = $this->moderator->findTeam($id);
+        $team = $this->team->findTeam($id);
 
         return $team;
     }
 
     public function updateTeam($id, $data)
     {
-        $moderator = $this->moderator->updateTeam($id, $data);
+        $team = $this->team->updateTeam($id, $data);
 
-        return $moderator;
+        return $team;
     }
 
     public function deleteTeams($id)
     {
-        $moderator = $this->moderator->deleteTeam($id);
+        $team = $this->team->deleteTeam($id);
 
-        return $moderator;
+        return $team;
     }
 }

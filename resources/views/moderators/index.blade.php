@@ -49,12 +49,12 @@
                                         <a href="{{ route('moderator.destroy', $moderator->id) }}"
                                            class="btn btn-danger"
                                            onclick="event.preventDefault();
-                                                     document.getElementById('delete-form').submit();">
+                                                     document.getElementById('delete-form-{{ $moderator->id }}').submit();">
                                             <em class="fa fa-trash"></em>
                                         </a>
 
                                         {{--TO send a delete request--}}
-                                        <form id="delete-form" action="{{ route('moderator.destroy', $moderator->id) }}"
+                                        <form id="delete-form-{{ $moderator->id }}" action="{{ route('moderator.destroy', $moderator->id) }}"
                                               method="POST">
                                             <input name="_method" type="hidden" value="DELETE">
                                             {{ csrf_field() }}

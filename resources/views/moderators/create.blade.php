@@ -16,7 +16,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <h3 class="panel-title">Moderators</h3>
+                                <h3 class="panel-title">Create Moderator</h3>
                             </div>
                             <div class="col col-xs-6 text-right">
                                 <a href="{{ route('moderator.create') }}" type="button"

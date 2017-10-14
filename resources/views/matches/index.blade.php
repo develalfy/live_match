@@ -1,9 +1,9 @@
 @extends('layouts.admin_template')
 
 
-@section('title', 'List Teams')
+@section('title', 'List Matches')
 
-@section('description', 'List all teams')
+@section('description', 'List all matches')
 
 @section('content')
 
@@ -21,10 +21,10 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <h3 class="panel-title">Teams</h3>
+                                <h3 class="panel-title">Matches</h3>
                             </div>
                             <div class="col col-xs-6 text-right">
-                                <a href="{{ route('team.create') }}" type="button"
+                                <a href="{{ route('match.create') }}" type="button"
                                    class="btn btn-sm btn-primary btn-create">Add New</a>
                             </div>
                         </div>
@@ -35,33 +35,36 @@
                             <tr>
                                 <th><em class="fa fa-cog"></em></th>
                                 <th class="hidden-xs">ID</th>
-                                <th>Name</th>
+                                <th>First Team</th>
+                                <th>Second Team</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($teams as $team)
+                            @foreach($matches as $match)
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ route('team.edit', $team->id) }}" class="btn btn-default"><em
+                                        <a href="{{ route('match.edit', $match->id) }}" class="btn btn-default"><em
                                                     class="fa fa-pencil"></em></a>
 
-                                        <a href="{{ route('team.destroy', $team->id) }}"
+                                        <a href="{{ route('match.destroy', $match->id) }}"
                                            class="btn btn-danger"
                                            onclick="event.preventDefault();
-                                                     document.getElementById('delete-form-{{$team->id}}').submit();">
+                                                   document.getElementById('delete-form-{{ $match->id }}').submit();">
                                             <em class="fa fa-trash"></em>
                                         </a>
 
                                         {{--TO send a delete request--}}
-                                        <form id="delete-form-{{$team->id}}" action="{{ route('team.destroy', $team->id) }}"
+                                        <form id="delete-form-{{ $match->id }}"
+                                              action="{{ route('match.destroy', $match->id) }}"
                                               method="POST">
                                             <input name="_method" type="hidden" value="DELETE">
                                             {{ csrf_field() }}
                                         </form>
 
                                     </td>
-                                    <td class="hidden-xs">{{ $team->id }}</td>
-                                    <td>{{ $team->name }}</td>
+                                    <td class="hidden-xs">{{ $match->id }}</td>
+                                    <td>{{ $match->first_team }}</td>
+                                    <td>{{ $match->second_team }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -71,7 +74,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col col-xs-8">
-                                {{ $teams->links() }}
+                                {{ $matches->links() }}
                             </div>
                         </div>
                     </div>
