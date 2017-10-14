@@ -25,18 +25,18 @@
             </li>
             {{-- Show this element for admin only --}}
             @if(Auth::user()->id === 1)
-                <li class="{{ Request::is('admin/moderator') ? 'active' : '' }}">
+                <li class="{{ Request::is('admin/moderator*') ? 'active' : '' }}">
                     <a href="{{ route('moderator.index') }}">
                         <i class="fa fa-user"></i> <span>Moderators</span>
                     </a>
                 </li>
             @endif
-            <li class="{{ Request::is('admin/team') ? 'active' : '' }}">
+            <li class="{{ Request::is('admin/team*') ? 'active' : '' }}">
                 <a href="{{ route('team.index') }}">
                     <i class="fa fa-signing"></i> <span>Teams</span>
                 </a>
             </li>
-            <li class="{{ Request::is('admin/match') ? 'active' : '' }}">
+            <li class="{{ Request::is('admin/match*') ? 'active' : '' }}">
                 <a href="{{ route('match.index') }}">
                     <i class="fa fa-soccer-ball-o"></i> <span>Matches</span>
                 </a>
