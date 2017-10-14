@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Core\Services\CommentService;
+use Core\Services\MatchService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private $matchService;
+    private $commentService;
+
     /**
-     * Create a new controller instance.
-     *
+     * HomeController constructor.
+     * @param MatchService $matchService
+     * @param CommentService $commentService
      */
-    public function __construct()
+    public function __construct(MatchService $matchService, CommentService $commentService)
     {
-        $this->middleware('auth');
+        $this->matchService = $matchService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -22,33 +29,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['tasks'] = [
-            [
-                'name' => 'Design New Dashboard',
-                'progress' => '87',
-                'color' => 'danger'
-            ],
-            [
-                'name' => 'Create Home Page',
-                'progress' => '76',
-                'color' => 'warning'
-            ],
-            [
-                'name' => 'Some Other Task',
-                'progress' => '32',
-                'color' => 'success'
-            ],
-            [
-                'name' => 'Start Building Website',
-                'progress' => '56',
-                'color' => 'info'
-            ],
-            [
-                'name' => 'Develop an Awesome Algorithm',
-                'progress' => '10',
-                'color' => 'success'
-            ]
-        ];
-        return view('dashboard')->with($data);
+        $matches = $this->matchService->listMatches();
+
+        return view('matches', compact('matches'));
+    }
+
+    /**
+     * Show single match.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $match = $this->matchService->viewMatch($id);
+        $commentTypes = $this->matchService->getCommentTypes();
+        $comments = $this->commentService->getCommentsForMatch($id);
+
+        return view('view_match', compact('match', 'commentTypes', 'comments'));
     }
 }

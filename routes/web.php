@@ -12,15 +12,14 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/match/{id}', 'HomeController@show')->name('user.match');
 
 /**
  * Admin Area
  */
 Route::prefix('admin')->group(function () {
-    Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::get('/', 'AdminController@home')->name('dashboard');
     Route::resource('moderator', 'ModeratorController');
     Route::resource('team', 'TeamController');
     Route::resource('match', 'MatchController');
