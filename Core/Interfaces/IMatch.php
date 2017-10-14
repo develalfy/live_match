@@ -19,4 +19,10 @@ interface IMatch
     public function deleteMatch($id);
 
     public function findMatch($id);
+
+    public function viewMatch($id);
+
+    public function getCommentTypes();
+
+    public function updateMatchScore($matchId, $matchData);
 }

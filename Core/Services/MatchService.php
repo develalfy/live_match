@@ -44,9 +44,16 @@ class MatchService
 
     public function findMatch($id)
     {
-        $team = $this->match->findMatch($id);
+        $match = $this->match->findMatch($id);
 
-        return $team;
+        return $match;
+    }
+
+    public function viewMatch($id)
+    {
+        $match = $this->match->viewMatch($id);
+
+        return $match;
     }
 
     public function updateMatch($id, $data)
@@ -61,5 +68,19 @@ class MatchService
         $match = $this->match->deleteMatch($id);
 
         return $match;
+    }
+
+    public function getCommentTypes()
+    {
+        $types = $this->match->getCommentTypes();
+
+        return $types;
+    }
+
+    public function updateMatchScore($matchId, $matchData)
+    {
+        $matchScore = $this->match->updateMatchScore($matchId, $matchData);
+
+        return $matchScore;
     }
 }

@@ -28,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
         $models = [
             'Moderator',
             'Team',
-            'Match'
+            'Match',
+            'Comment'
         ];
 
         foreach ($models as $model) {

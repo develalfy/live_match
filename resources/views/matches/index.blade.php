@@ -43,6 +43,8 @@
                             @foreach($matches as $match)
                                 <tr>
                                     <td align="center">
+                                        <a href="{{ route('match.show', $match->id) }}" class="btn btn-success"><em
+                                                    class="fa fa-eye"></em></a>
                                         <a href="{{ route('match.edit', $match->id) }}" class="btn btn-default"><em
                                                     class="fa fa-pencil"></em></a>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Core\Services\CommentService;
 use Core\Services\TeamService;
 use Illuminate\Http\Request;
 use Core\Services\MatchService;
@@ -15,17 +16,20 @@ class MatchController extends Controller
      */
     private $matchService;
     private $teamService;
+    private $commentService;
 
     /**
      * Create a new controller instance.
      * @param MatchService $matchService
      * @param TeamService $teamService
+     * @param CommentService $commentService
      */
-    public function __construct(MatchService $matchService, TeamService $teamService)
+    public function __construct(MatchService $matchService, TeamService $teamService, CommentService $commentService)
     {
         $this->middleware('auth');
         $this->matchService = $matchService;
         $this->teamService = $teamService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -96,7 +100,11 @@ class MatchController extends Controller
      */
     public function show($id)
     {
-        //
+        $match = $this->matchService->viewMatch($id);
+        $commentTypes = $this->matchService->getCommentTypes();
+        $comments = $this->commentService->getCommentsForMatch($id);
+
+        return view('matches.show', compact('match', 'commentTypes', 'comments'));
     }
 
     /**

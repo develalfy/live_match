@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('moderator', 'ModeratorController');
     Route::resource('team', 'TeamController');
     Route::resource('match', 'MatchController');
+    Route::resource('match/{id}/comment', 'CommentController');
 });
 
 /**

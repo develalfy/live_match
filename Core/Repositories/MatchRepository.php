@@ -50,11 +50,37 @@ class MatchRepository implements IMatch
         return $team;
     }
 
+    /**
+     * Get match basic details without names
+     * @param $id
+     * @return mixed
+     */
     public function findMatch($id)
     {
         $team = Match::find($id);
 
         return $team;
+    }
+
+    /**
+     * Get match details with names
+     * @param $id
+     */
+    public function viewMatch($id)
+    {
+        $match = DB::table('matches')
+            ->leftJoin('teams as first', 'matches.first_team_id', '=', 'first.id')
+            ->leftJoin('teams as second', 'matches.second_team_id', '=', 'second.id')
+            ->where('matches.id', '=', $id)
+            ->first([
+                'matches.id',
+                'first.name as first_team',
+                'second.name as second_team',
+                'matches.first_team_score as first_team_score',
+                'matches.second_team_score as second_team_score',
+            ]);
+
+        return $match;
     }
 
     /**
@@ -84,5 +110,32 @@ class MatchRepository implements IMatch
         $team->delete();
 
         return $team;
+    }
+
+    public function getCommentTypes()
+    {
+        // todo: CRUD for comment types
+        $types = [
+            'goal',
+            '​​foul',
+            '​​penalty',
+            '​offside',
+            '​​yellow​ ​card',
+            '​red​ ​card',
+            '​match​ ​beginning',
+            '​match​ ​ended'
+        ];
+
+        return $types;
+    }
+
+    public function updateMatchScore($matchId, $matchData)
+    {
+        $match = Match::find($matchId);
+
+        $match->first_team_score = $matchData['first_team_score'];
+        $match->second_team_score = $matchData['second_team_score'];
+
+        $match->save();
     }
 }
