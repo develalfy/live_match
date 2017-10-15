@@ -57,7 +57,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
     <script>
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('{{getenv('SERVER_IP')}}:3000');
 
         socket.on('test-channel:App\\Events\\CommentInserted', function (data) {
             $('#first_team_score').text(data.liveData.first_team_score);
