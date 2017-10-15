@@ -60,6 +60,7 @@
         var socket = io.connect('{{getenv('SERVER_IP')}}:3000');
 
         socket.on('test-channel:App\\Events\\CommentInserted', function (data) {
+            console.log(data);
             $('#first_team_score').text(data.liveData.first_team_score);
             $('#second_team_score').text(data.liveData.second_team_score);
             $('#highlights').append('<div class="highlight highlight-source-shell">\n' +
