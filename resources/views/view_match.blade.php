@@ -26,25 +26,47 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td align="center">
+                            <td align="center" id="first_team_score">
                                 {{ $match->first_team_score }}
                             </td>
-                            <td align="center">
+                            <td align="center" id="second_team_score">
                                 {{ $match->second_team_score }}
                             </td>
                         </tr>
                         </tbody>
                     </table>
 
-                    @foreach($comments as $comment)
-                        <div class="highlight highlight-source-shell">
-                            <code>{{ $comment->type }}</code>
-                            <pre>{{ $comment->desc }}</pre>
-                        </div>
-                    @endforeach
+                    <div id="highlights">
+                        @foreach($comments as $comment)
+                            <div class="highlight highlight-source-shell">
+                                <code>{{ $comment->type }}</code>
+                                <pre>{{ $comment->desc }}</pre>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+    {{-- User live session with Moderators --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+    <script>
+        var socket = io.connect('http://localhost:3000');
+
+        socket.on('test-channel:App\\Events\\CommentInserted', function (data) {
+            $('#first_team_score').text(data.liveData.first_team_score);
+            $('#second_team_score').text(data.liveData.second_team_score);
+            $('#highlights').append('<div class="highlight highlight-source-shell">\n' +
+                '                                <code>'+data.liveData.type+'</code>\n' +
+                '                                <pre>'+data.liveData.desc+'</pre>\n' +
+                '                            </div>');
+        });
+    </script>
+
 @endsection

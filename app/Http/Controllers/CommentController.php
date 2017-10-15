@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentInserted;
 use Core\Services\CommentService;
 use Core\Services\MatchService;
 use Illuminate\Http\Request;
@@ -59,12 +60,24 @@ class CommentController extends Controller
         // insert new comment
         if ($request->get('type')) {
             $commentData = Input::only(['type', 'desc']);
-            $this->commentService->addComment($matchId, $commentData);
+            $matchComment = $this->commentService->addComment($matchId, $commentData);
         }
 
         // update match result
         $matchData = Input::only(['first_team_score', 'second_team_score']);
         $this->matchService->updateMatchScore($matchId, $matchData);
+
+        if (isset($matchComment)) {
+            $liveData = [
+                'type' => $matchComment->type,
+                'desc' => $matchComment->desc
+            ];
+            // push to live users
+            $liveData['first_team_score'] = $matchData['first_team_score'];
+            $liveData['second_team_score'] = $matchData['second_team_score'];
+            event(new CommentInserted($liveData));
+        }
+
 
         return redirect()->back();
     }
