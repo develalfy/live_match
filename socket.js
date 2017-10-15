@@ -14,4 +14,4 @@ redis.on('message', function (channel, message) {
 });
 
 
-server.listen(3000, '138.197.118.58');
+server.listen(3000);
