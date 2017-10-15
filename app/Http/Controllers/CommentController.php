@@ -67,12 +67,12 @@ class CommentController extends Controller
         $matchData = Input::only(['first_team_score', 'second_team_score']);
         $this->matchService->updateMatchScore($matchId, $matchData);
 
+        // push to live users
         if (isset($matchComment)) {
             $liveData = [
                 'type' => $matchComment->type,
                 'desc' => $matchComment->desc
             ];
-            // push to live users
             $liveData['first_team_score'] = $matchData['first_team_score'];
             $liveData['second_team_score'] = $matchData['second_team_score'];
             event(new CommentInserted($liveData));
